@@ -1,7 +1,7 @@
 ##### Para la versión en español revisa [README_ESPAÑOL](README_ES.md)
 
 # Webhook
-The Webhook class is a PHP utility intended for use in PocketMine-MP (it can be used in other areas as well), allowing seamless message delivery to Discord webhooks. It enables you to create both simple messages and enriched embeds. To use it, simply follow the steps below.
+The Webhook class is a PHP utility intended for use in PocketMine-MP (it can be used in other areas as well), allowing seamless message delivery to Discord webhooks. It enables you to create both simple messages and embeds. To use it, simply follow the steps below.
 
 ## Setup
 To set up the Webhook class in your PocketMine-MP project, follow these steps:
