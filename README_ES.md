@@ -68,7 +68,7 @@ $webhook->setUrl('YOUR_WEBHOOK_URL');
 
 // Establece los detalles del embed
 $webhook->setTitle('Ejemplo de Título del Embed');
-$webhook->setDescription(['Esta es la primera línea de la descripción del embed.', 'Esta es la segunda línea.']);
+$webhook->setDescription('Esta es la primera línea de la descripción del embed. {line} Esta es la segunda línea.');
 $webhook->setColor('#ff5733'); // Establece el color del embed usando un valor hex
 $webhook->setFooter('Texto del Pie', null); // Opcionalmente establece un pie de página
 
@@ -91,7 +91,7 @@ $webhook->send();
    - Este método establece el mensaje que deseas enviar. El mensaje puede ser un arreglo de cadenas, que se concatenarán en un solo mensaje.
    - **Example:**
      ```php
-     $webhook->setMessage('Hola, este es un ejemplo de línea 1', 'ejemplo de línea 2');
+     $webhook->setMessage('Hola, este es un ejemplo de línea 1 {line} ejemplo de línea 2');
      ```
 3. **setTitle(?string $title): void**
    - Este método establece el título del mensaje embebido. El título aparece como texto en negrita en la parte superior del embed.
