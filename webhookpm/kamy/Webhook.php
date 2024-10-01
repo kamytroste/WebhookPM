@@ -33,9 +33,13 @@ class Webhook
         $this->url = $url;
     }
 
-    public function setMessage(array $message): void
+    public function setMessage(string|array $message): void
     {
-        $this->message = $message;
+        if (is_string($message)) {
+            $this->message = explode('{line}', $message);
+        } else {
+            $this->message = $message;
+        }
     }
 
     public function setAuthor(string $author): void
@@ -48,9 +52,9 @@ class Webhook
         $this->title = $title;
     }
 
-    public function setDescription(array $description): void
+    public function setDescription(string $description): void
     {
-        $this->description = implode("\n", $description);
+        $this->description = implode("\n", explode('{line}', $description));
     }
 
     public function setColor(string $color): void
