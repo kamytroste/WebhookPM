@@ -29,7 +29,7 @@ $webhook = Webhook::create(WebhookType::TYPE_SIMPLE);
 $webhook->setUrl('YOUR_WEBHOOK_URL');
 
 // Establece el mensaje a enviar
-$webhook->setMessage(['¡Hola mundo!']);
+$webhook->setMessage('¡Hola mundo!');
 
 // Envía el mensaje
 $webhook->send();
@@ -42,11 +42,11 @@ $webhook->send();
      ```php
      $webhook->setUrl('YOUR_WEBHOOK_URL');
      ```
-2. **setMessage(array $message): void**
-   - Este método establece el mensaje que deseas enviar. El mensaje puede ser un arreglo de cadenas, que se concatenarán en un solo mensaje.
+2. **setMessage(string $message): void**
+   - Este método establece el mensaje que deseas enviar. Si el mensaje contiene el argumento `{line}`, este hará que el texto se divida y se muestre en la siguiente línea. Puedes pasar el mensaje como una cadena que incluya `{line}`, y el sistema se encargará de formatearlo correctamente.
    - **Ejemplo:**
      ```php
-     $webhook->setMessage(['Hello, this is a line 1 example', 'line 2 example']);
+     $webhook->setMessage('Hola, este es un ejemplo de la línea 1 {line} ejemplo de la línea 2');
      ```
 3. **send(): void**
    - Este método envía el mensaje preparado a la URL de webhook especificada. Construye la carga útil y utiliza cURL para realizar una solicitud POST a la URL del webhook. Si ocurre un error durante la solicitud cURL, registrará el error.
@@ -87,37 +87,37 @@ $webhook->send();
      ```php
      $webhook->setUrl('YOUR_WEBHOOK_URL');
      ```
-3. **setMessage(array $message): void** `OPCIONAL`
+2. **setMessage(string $message): void** `OPCIONAL`
    - Este método establece el mensaje que deseas enviar. El mensaje puede ser un arreglo de cadenas, que se concatenarán en un solo mensaje.
    - **Example:**
      ```php
-     $webhook->setMessage(['Hola, este es un ejemplo de línea 1', 'ejemplo de línea 2']);
+     $webhook->setMessage('Hola, este es un ejemplo de línea 1', 'ejemplo de línea 2');
      ```
-4. **setTitle(?string $title): void**
+3. **setTitle(?string $title): void**
    - Este método establece el título del mensaje embebido. El título aparece como texto en negrita en la parte superior del embed.
    - **Example:**
      ```php
      $webhook->setTitle('Ejemplo de Título del Embed');
      ```
-5. **setDescription(array $description): void**
-   - Este método establece la descripción del mensaje embebido. Puedes proporcionar un arreglo de cadenas, que se concatenarán en una sola descripción.
+4. **setDescription(string $description): void**
+   - Este método establece la descripción del mensaje incrustado. Puedes proporcionar una cadena, y si contiene el argumento `{line}`, hará que el texto pase a la siguiente línea.
    - **Example:**
      ```php
-     $webhook->setDescription(['Esta es la primera línea de la descripción del embed.', 'Esta es la segunda línea.']);
+     $webhook->setDescription('Esta es la primera línea de la descripción del embed. {line} Esta es la segunda línea.');
      ```
-6. **setColor(string $color): void**
+5. **setColor(string $color): void**
    - Este método establece el color del embed. El color debe proporcionarse como un valor hex (por ejemplo, `#ff5733`).
    - **Example:**
      ```php
      $webhook->setColor('#ff5733');
      ```
-7. **setFooter(string $footer, ?string $timestamp = null): void**
+6. **setFooter(string $footer, ?string $timestamp = null): void**
    - Este método establece el texto del pie de página del embed. Puedes proporcionar opcionalmente un timestamp que se mostrará junto al pie de página.
    - **Example:**
      ```php
      $webhook->setFooter('Texto del Pie');
      ```
-8. **addField(string $name, string $value): void**
+7. **addField(string $name, string $value): void**
    - Este método agrega un campo al embed. Cada campo tiene un nombre y un valor, y los campos pueden hacerse `inline` estableciendo inline en verdadero.
    - **Example:**
      ```php

@@ -31,7 +31,7 @@ $webhook = Webhook::create(WebhookType::TYPE_SIMPLE);
 $webhook->setUrl('YOUR_WEBHOOK_URL');
 
 // Set the message to send
-$webhook->setMessage(['Hello world!']);
+$webhook->setMessage('Hello world!');
 
 // Send the message
 $webhook->send();
@@ -43,11 +43,11 @@ $webhook->send();
      ```php
      $webhook->setUrl('YOUR_WEBHOOK_URL');
      ```
-2. **setMessage(array $message): void**
-   - This method sets the message that you want to send. The message can be an array of strings, which will be concatenated into a single message.
+2. **setMessage(string $message): void**
+   - This method sets the message you want to send. If the message contains the `{line}` argument, it will cause the text to break and display on the next line. You can pass the message as a string that includes `{line}`, and the system will handle the formatting accordingly.
    - **Example:**
      ```php
-     $webhook->setMessage(['Hello, this is a line 1 example', 'line 2 example']);
+     $webhook->setMessage('Hello, this is a line 1 example {line} line 2 example');
      ```
 3. **send(): void**
    - This method sends the prepared message to the specified webhook URL. It constructs the payload and uses cURL to perform a POST request to the webhook URL. If an error occurs during the cURL request, it will log the error.
@@ -69,7 +69,7 @@ $webhook->setUrl('YOUR_WEBHOOK_URL');
 
 // Set the embed details
 $webhook->setTitle('Example Embed Title');
-$webhook->setDescription(['This is the first line of the embed description.', 'This is the second line.']);
+$webhook->setDescription('This is the first line of the embed description. {line} This is the second line.');
 $webhook->setColor('#ff5733'); // Set the color of the embed using a hex value
 $webhook->setFooter('Footer Text', null); // Optionally set a footer
 
@@ -87,37 +87,37 @@ $webhook->send();
      ```php
      $webhook->setUrl('YOUR_WEBHOOK_URL');
      ```
-3. **setMessage(array $message): void** `OPTIONAL`
-   - This method sets the message that you want to send. The message can be an array of strings, which will be concatenated into a single message.
-   - **Example:**
-     ```php
-     $webhook->setMessage(['Hello, this is a line 1 example', 'line 2 example']);
-     ```
-4. **setTitle(?string $title): void**
+2. **setMessage(string $message): void**
+    - This method sets the message you want to send. If the message contains the `{line}` argument, it will cause the text to break and display on the next line. You can pass the message as a string that includes `{line}`, and the system will handle the formatting accordingly.
+    - **Example:**
+      ```php
+      $webhook->setMessage('Hello, this is a line 1 example {line} line 2 example');
+      ```
+3. **setTitle(?string $title): void**
    - This method sets the title of the embed message. The title appears as a bold text at the top of the embed.
    - **Example:**
      ```php
      $webhook->setTitle('Example Embed Title');
      ```
-5. **setDescription(array $description): void**
-   - This method sets the description of the embed message. You can provide an array of strings, which will be concatenated into a single description.
+4. **setDescription(string $description): void**
+   - This method sets the description of the embed message. You can provide a string, and if it contains the `{line}` argument, it will cause the text to break and display on the next line.
    - **Example:**
      ```php
-     $webhook->setDescription(['This is the first line of the embed description.', 'This is the second line.']);
+     $webhook->setDescription('This is the first line of the embed description. {line} This is the second line.');
      ```
-6. **setColor(string $color): void**
+5. **setColor(string $color): void**
    - This method sets the color of the embed. The color should be provided as a hex value (e.g., `#ff5733`).
    - **Example:**
      ```php
      $webhook->setColor('#ff5733');
      ```
-7. **setFooter(string $footer, ?string $timestamp = null): void**
+6. **setFooter(string $footer, ?string $timestamp = null): void**
    - This method sets the footer text of the embed. You can optionally provide a timestamp that will be displayed alongside the footer.
    - **Example:**
      ```php
      $webhook->setFooter('Footer Text');
      ```
-8. **addField(string $name, string $value): void**
+7. **addField(string $name, string $value): void**
    - This method adds a field to the embed. Each field has a name and a value, and fields can be made `inline` by setting inline to true.
    - **Example:**
      ```php
