@@ -6,7 +6,7 @@ namespace webhookpm\kamy;
 class Webhook
 {
     private string $url;
-    private array $message = [];
+    private ?string $message = null;
     private WebhookType $type;
 
     private ?string $author = null;
@@ -33,13 +33,9 @@ class Webhook
         $this->url = $url;
     }
 
-    public function setMessage(string|array $message): void
+    public function setMessage(string $message): void
     {
-        if (is_string($message)) {
-            $this->message = explode('{line}', $message);
-        } else {
-            $this->message = $message;
-        }
+        $this->message = str_replace('{line}', "\n", $message);
     }
 
     public function setAuthor(string $author): void
@@ -54,7 +50,7 @@ class Webhook
 
     public function setDescription(string $description): void
     {
-        $this->description = implode("\n", explode('{line}', $description));
+        $this->description = str_replace('{line}', "\n", $description);
     }
 
     public function setColor(string $color): void
@@ -80,9 +76,9 @@ class Webhook
     public function send(): void
     {
         $payload = $this->type === WebhookType::TYPE_SIMPLE
-            ? json_encode(["content" => implode("\n", $this->message)])
+            ? json_encode(["content" => $this->message])
             : json_encode([
-                "content" => implode("\n", $this->message),
+                "content" => $this->message,
                 "embeds" => [[
                     "author" => $this->author ? ["name" => $this->author] : null,
                     "title" => $this->title,
